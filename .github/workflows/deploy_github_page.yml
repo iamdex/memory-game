@@ -57,9 +57,12 @@ jobs:
       - name: Identify
         run: git config user.name github-actions && git config user.email github-actions@github.com
 
-      - name: Commit & push to gh-pages branch
-        run: git --work-tree build/web add --all && git commit -m "Automatic deployment by github-actions" && git push origin HEAD:gh-pages --force
-        
+      - name: Add & Commit 
+        run: git --work-tree build/web add --all && git commit -m "Automatic deployment by github-actions"
+      
+      - name: Push
+        run: git push origin HEAD:gh-pages --force
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v2
         with:

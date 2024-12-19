@@ -45,13 +45,20 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: stable
+          
       - name: Install dependencies
         run: flutter pub get
         working-directory: ${{env.working-directory}}
+        
       - name: Build web app
         run: flutter build web
         working-directory: ${{env.working-directory}}
 
+      - name: Commit & push to gh-pages branch
+        run: git --work-tree build/web add --all
+             git commit -m "Automatic deployment by github-actions"
+             git push origin HEAD:gh-pages --force
+        
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v2
         with:

@@ -54,6 +54,9 @@ jobs:
         run: flutter build web
         working-directory: ${{env.working-directory}}
 
+      - name: Identify
+        run: git config user.name github-actions && git config user.email github-actions@github.com
+
       - name: Commit & push to gh-pages branch
         run: git --work-tree build/web add --all && git commit -m "Automatic deployment by github-actions" && git push origin HEAD:gh-pages --force
         
